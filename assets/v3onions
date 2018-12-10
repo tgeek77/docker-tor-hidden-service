@@ -1,2 +1,2 @@
-#!/bin/bash
+#!/bin/sh
 ls -l /var/lib/tor/hidden_service/*/hostname | cut -c58- && cat /var/lib/tor/hidden_service/*/hostname && echo
