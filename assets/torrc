@@ -3,6 +3,7 @@ HiddenServiceDir /var/lib/tor/hidden_service/{{service_group.name}}
 {% for service in service_group.services %}
 {% for port in service.ports %}
 {% if port.is_socket %}
+HiddenServiceVersion 3
 HiddenServicePort {{port.port_from}} {{port.dest}}
 {% endif %}
 {% if not port.is_socket %}
