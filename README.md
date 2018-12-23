@@ -1,9 +1,16 @@
-# docker-tor-hidden-service
+# docker-tor-hidden-service-v3
 
 ## What's New?
 
+* This is the new v3 images. It creates the newer tor v3 (56 character) onions addresses. There is a bug/workaround though. In order to view your v3 addresses, you must run:
+
+```docker exec [your tor container] v3onions```
+
+I'm not a python wiz and it may take a while to make it as easy to use as the v2 onions, but I think this is a fair workaround for now.
+
 * /version is a text file with the current of Tor version generated with each build 
 * Weekly builds. The Goldy's original image hadn't been updated in some time. Using the latest version of Tor is always best practice.
+
 
 Create a tor hidden service with a link
 
@@ -29,7 +36,7 @@ Look at the `docker-compose.yml` file to see how to use it.
 
 ### Set private key
 
-Private key is settable by environment or by copying file in `hostname/private_key` in docket volume (`hostname` is the link name).
+Private key is settable by environment or by copying the file in `hostname/private_key` in docket volume (`hostname` is the link name).
 
 It's easier to pass key in environment with `docker-compose`.
 
@@ -67,7 +74,7 @@ __Caution__: Using `PORT_MAP` with multiple ports on single service will cause `
 
 Use link setting in environment with the following pattern: `LINKNAME_PORTS`.
 
-Like docker, first port is exposed port and the second one is service internal port.
+Like docker, the first port is exposed port and the second one is service internal port.
 
 ```yaml
 links:
@@ -137,17 +144,13 @@ Secret key can be set through docker `secrets`, see `docker-compose.v3.yml` for 
 
 ### Tools
 
-A command line tool `onions` is available in container to get `.onion` url when container is running.
+A command line tool `v3onions` is available in the container to get the `.onion` url when the container is running.
 
 ```sh
 # Get services
-$ docker exec -ti torhiddenproxy_tor_1 onions
-hello: vegm3d7q64gutl75.onion:80
-world: b2sflntvdne63amj.onion:80
-
-# Get json
-$ docker exec -ti torhiddenproxy_tor_1 onions --json
-{"hello": ["b2sflntvdne63amj.onion:80"], "world": ["vegm3d7q64gutl75.onion:80"]}
+$ docker exec my_tor_container v3onions
+/var/lib/tor/hidden_service/my_tor_container/hostname
+p7gyaqryx6hru34lodxorn7cr6jglnpe3huwzqffo6mogwkfwn6d7iyd.onion
 ```
 
 ### Auto reload
