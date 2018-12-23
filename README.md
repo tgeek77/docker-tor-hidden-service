@@ -19,7 +19,7 @@ Create a tor hidden service with a link
 $ docker run -d --name hello_world tutum/hello-world
 
 # and just link it to this container
-$ docker run -ti --link hello_world goldy/tor-hidden-service
+$ docker run -ti --link hello_world jsevans/tor-hidden-service-v3
 ```
 
 The .onion URLs are displayed to stdout at startup.
@@ -27,7 +27,7 @@ The .onion URLs are displayed to stdout at startup.
 To keep onion keys, just mount volume `/var/lib/tor/hidden_service/`
 
 ```sh
-$ docker run -ti --link something --volume /path/to/keys:/var/lib/tor/hidden_service/ goldy/tor-hidden-service
+$ docker run -ti --link something --volume /path/to/keys:/var/lib/tor/hidden_service/ jsevans/tor-hidden-service-v3
 ```
 
 Look at the `docker-compose.yml` file to see how to use it.
