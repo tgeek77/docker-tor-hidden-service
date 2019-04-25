@@ -1,4 +1,4 @@
-FROM    arm64v8/alpine
+FROM    alpine
 
 ENV     HOME /var/lib/tor
 
